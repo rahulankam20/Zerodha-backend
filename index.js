@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 
@@ -13,10 +12,12 @@ const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
 
 app.use(express.json());
-app.use(cors({
-  origin: ['https://zerodha-frontend-tau.vercel.app/', 'https://zerodha-dashboard-mauve.vercel.app'],
-}));
 
+app.use(cors({
+  origin: ['https://zerodha-frontend-tau.vercel.app', 'https://zerodha-dashboard-mauve.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 const mongoose= require('mongoose');
 
